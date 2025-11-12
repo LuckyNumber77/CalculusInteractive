@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Play from './pages/Play';
 import GameBoard from './components/GameBoard';
@@ -11,11 +11,11 @@ const App: React.FC = () => {
     <Router>
       <div className="app">
         <HUD />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/play" component={Play} />
-          <Route path="/game" component={GameBoard} />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/play" element={<Play />} />
+          <Route path="/game" element={<GameBoard />} />
+        </Routes>
       </div>
     </Router>
   );

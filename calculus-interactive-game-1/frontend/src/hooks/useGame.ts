@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
 
+interface Problem {
+    question: string;
+    answer: string;
+}
+
 const useGame = () => {
     const [score, setScore] = useState(0);
-    const [problems, setProblems] = useState([]);
+    const [problems, setProblems] = useState<Problem[]>([]);
     const [currentProblemIndex, setCurrentProblemIndex] = useState(0);
     const [isGameOver, setIsGameOver] = useState(false);
 
     useEffect(() => {
-        // Fetch or generate problems for the game
         const fetchProblems = async () => {
-            // Placeholder for fetching problems
             const fetchedProblems = await generateProblems();
             setProblems(fetchedProblems);
         };
@@ -17,16 +20,14 @@ const useGame = () => {
         fetchProblems();
     }, []);
 
-    const generateProblems = async () => {
-        // Placeholder for problem generation logic
+    const generateProblems = async (): Promise<Problem[]> => {
         return [
             { question: 'What is the derivative of x^2?', answer: '2x' },
             { question: 'What is the integral of x?', answer: '0.5x^2 + C' },
-            // Add more problems as needed
         ];
     };
 
-    const answerProblem = (answer) => {
+    const answerProblem = (answer: string) => {
         if (isGameOver) return;
 
         const currentProblem = problems[currentProblemIndex];
