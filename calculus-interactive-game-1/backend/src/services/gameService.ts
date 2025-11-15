@@ -1,12 +1,12 @@
-import { Problem } from '../models/problem'; // Assuming there's a Problem model
-import { User } from '../models/user';
+import { Problem } from '../models/problem';
+import User from '../models/user';
 
 export class GameService {
     private problems: Problem[];
     private currentProblemIndex: number;
-    private user: User;
+    private user?: User;
 
-    constructor(user: User) {
+    constructor(user?: User) {
         this.user = user;
         this.problems = this.loadProblems();
         this.currentProblemIndex = 0;

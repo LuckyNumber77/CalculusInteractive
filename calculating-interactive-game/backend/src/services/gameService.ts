@@ -1,5 +1,5 @@
-import { Problem } from '../models/problem'; // Assuming there's a Problem model
-import { User } from '../models/user';
+import { Problem } from '../models/problem';
+import User from '../models/user';
 
 export class GameService {
     private problems: Problem[];
