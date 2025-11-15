@@ -3,9 +3,10 @@ import React from 'react';
 interface ProblemCardProps {
     problem: string;
     onSolve: (solution: string) => void;
+    onRequestHelp: () => void;
 }
 
-const ProblemCard: React.FC<ProblemCardProps> = ({ problem, onSolve }) => {
+const ProblemCard: React.FC<ProblemCardProps> = ({ problem, onSolve, onRequestHelp }) => {
     const [solution, setSolution] = React.useState('');
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -27,6 +28,13 @@ const ProblemCard: React.FC<ProblemCardProps> = ({ problem, onSolve }) => {
                 />
                 <button type="submit">Submit</button>
             </form>
+            <button 
+                type="button" 
+                className="help-button"
+                onClick={onRequestHelp}
+            >
+                Need Help?
+            </button>
         </div>
     );
 };

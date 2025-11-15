@@ -3,6 +3,8 @@ export type Problem = {
     question: string;
     answer: number;
     options: number[];
+    lessonTopic?: string;
+    lessonUrl?: string;
 };
 
 export type User = {

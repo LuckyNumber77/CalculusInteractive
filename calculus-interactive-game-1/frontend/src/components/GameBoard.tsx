@@ -1,9 +1,12 @@
 import React from 'react';
 import ProblemCard from './ProblemCard';
+import HelpModal from './HelpModal';
 
 interface Problem {
     question: string;
     answer: string;
+    lessonTopic?: string;
+    lessonUrl?: string;
 }
 
 interface GameBoardProps {
@@ -11,8 +14,13 @@ interface GameBoardProps {
     problems: Problem[];
     currentProblemIndex: number;
     isGameOver: boolean;
+    showHelp: boolean;
+    wasWrong: boolean;
     answerProblem: (answer: string) => void;
     resetGame: () => void;
+    requestHelp: () => void;
+    closeHelp: () => void;
+    skipProblem: () => void;
 }
 
 const GameBoard: React.FC<GameBoardProps> = ({
@@ -20,8 +28,13 @@ const GameBoard: React.FC<GameBoardProps> = ({
     problems,
     currentProblemIndex,
     isGameOver,
+    showHelp,
+    wasWrong,
     answerProblem,
     resetGame,
+    requestHelp,
+    closeHelp,
+    skipProblem,
 }) => {
     const currentProblem = problems[currentProblemIndex];
 
@@ -33,10 +46,22 @@ const GameBoard: React.FC<GameBoardProps> = ({
             </div>
             
             {!isGameOver && currentProblem ? (
-                <ProblemCard 
-                    problem={currentProblem.question} 
-                    onSolve={answerProblem} 
-                />
+                <>
+                    <ProblemCard 
+                        problem={currentProblem.question} 
+                        onSolve={answerProblem}
+                        onRequestHelp={requestHelp}
+                    />
+                    {showHelp && (
+                        <HelpModal
+                            lessonTopic={currentProblem.lessonTopic}
+                            lessonUrl={currentProblem.lessonUrl}
+                            wasWrong={wasWrong}
+                            onClose={closeHelp}
+                            onSkip={skipProblem}
+                        />
+                    )}
+                </>
             ) : isGameOver ? (
                 <div className="game-over">
                     <h2>Game Over!</h2>
