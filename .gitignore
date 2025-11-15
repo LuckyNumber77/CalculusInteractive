@@ -2,3 +2,7 @@ node_modules/
 .env
 screenshots/
 dist/
+
+# Large generated files
+calculus-interactive-game-1/backend/public/assets/calculus.txt
+calculus-interactive-game-1/backend/data/problems.full.json

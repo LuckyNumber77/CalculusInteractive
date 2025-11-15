@@ -42,6 +42,14 @@ const HelpModal: React.FC<HelpModalProps> = ({
                     >
                         Open Lesson
                     </a>
+                    <a 
+                        href="/assets/calculus.txt" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="button"
+                    >
+                        View Full Calculus Text
+                    </a>
                     <button className="button" onClick={onClose}>
                         Try Again
                     </button>
