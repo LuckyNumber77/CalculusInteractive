@@ -4,9 +4,9 @@ import { User } from '../models/user';
 export class GameService {
     private problems: Problem[];
     private currentProblemIndex: number;
-    private user: User;
+    private user?: User;
 
-    constructor(user: User) {
+    constructor(user?: User) {
         this.user = user;
         this.problems = this.loadProblems();
         this.currentProblemIndex = 0;
@@ -40,5 +40,24 @@ export class GameService {
     public getUserScore(): number {
         // Logic to calculate user score based on correct answers
         return 0; // Placeholder for actual score calculation
+    }
+
+    // New method expected by GameController
+    public async fetchGameProblems(): Promise<Problem[]> {
+        return this.problems;
+    }
+
+    // New method expected by GameController
+    public async checkAnswer(problemId: string | number, answer: number): Promise<{ correct: boolean; message?: string }> {
+        const currentProblem = this.getCurrentProblem();
+        if (!currentProblem) {
+            return { correct: false, message: 'No problem available' };
+        }
+        
+        const isCorrect = this.submitAnswer(answer);
+        return {
+            correct: isCorrect,
+            message: isCorrect ? 'Correct answer!' : 'Incorrect answer, try again.'
+        };
     }
 }
