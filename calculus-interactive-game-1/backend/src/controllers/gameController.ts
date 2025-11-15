@@ -1,29 +1,22 @@
 import { Request, Response } from 'express';
 import { GameService } from '../services/gameService';
 
-export class GameController {
-    private gameService: GameService;
+export const getGame = (req: Request, res: Response): void => {
+    const gameService = new GameService();
+    res.status(200).json({ message: 'Get game endpoint' });
+};
 
-    constructor() {
-        this.gameService = new GameService();
-    }
+export const createGame = (req: Request, res: Response): void => {
+    const gameService = new GameService();
+    res.status(201).json({ message: 'Create game endpoint' });
+};
 
-    public async getGameProblems(req: Request, res: Response): Promise<void> {
-        try {
-            const problems = await this.gameService.fetchGameProblems();
-            res.status(200).json(problems);
-        } catch (error) {
-            res.status(500).json({ message: 'Error fetching game problems', error });
-        }
-    }
+export const updateGame = (req: Request, res: Response): void => {
+    const gameService = new GameService();
+    res.status(200).json({ message: 'Update game endpoint' });
+};
 
-    public async submitAnswer(req: Request, res: Response): Promise<void> {
-        const { problemId, answer } = req.body;
-        try {
-            const result = await this.gameService.checkAnswer(problemId, answer);
-            res.status(200).json(result);
-        } catch (error) {
-            res.status(500).json({ message: 'Error submitting answer', error });
-        }
-    }
-}
+export const deleteGame = (req: Request, res: Response): void => {
+    const gameService = new GameService();
+    res.status(204).send();
+};
