@@ -15,40 +15,192 @@ h1, h2, h3 {
     overflow: hidden;
 }
 
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .game-board {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
+    padding: 20px;
+}
+
+.score-display {
+    background: #007bff;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    margin: 20px 0;
+    font-size: 1.2em;
+}
+
+.score-display h2 {
+    margin: 0;
+    color: white;
 }
 
 .problem-card {
     background: #fff;
-    border: 1px solid #ccc;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    min-width: 400px;
+    max-width: 600px;
+}
+
+.problem-card h3 {
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.problem-card p {
+    font-size: 1.3em;
+    margin: 20px 0;
+    color: #333;
+}
+
+.problem-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.problem-card input {
+    padding: 12px;
+    font-size: 1.1em;
+    border: 2px solid #ccc;
     border-radius: 5px;
-    padding: 20px;
-    margin: 10px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s;
+}
+
+.problem-card input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.problem-card button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background 0.3s;
+}
+
+.problem-card button:hover {
+    background: #218838;
+}
+
+.game-over {
+    background: #fff;
+    border: 2px solid #ffc107;
+    border-radius: 10px;
+    padding: 40px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    min-width: 400px;
+}
+
+.game-over h2 {
+    color: #ffc107;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.game-over p {
+    font-size: 1.3em;
+    margin: 20px 0;
+}
+
+.loading {
+    padding: 40px;
+    text-align: center;
+    font-size: 1.2em;
+    color: #666;
 }
 
 .hud {
     background: #007bff;
     color: white;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 20px;
+    padding: 15px;
     text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hud h2 {
+    margin: 0;
+    color: white;
+    font-size: 1.5em;
+}
+
+.hud p {
+    margin: 5px 0 0 0;
+    opacity: 0.9;
 }
 
 .button {
     background: #28a745;
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 12px 24px;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 1.1em;
+    transition: background 0.3s;
 }
 
 .button:hover {
     background: #218838;
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    padding: 40px;
+}
+
+.home h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+.home p {
+    font-size: 1.3em;
+    margin-bottom: 30px;
+    color: #666;
+}
+
+.start-button {
+    background: #007bff;
+    color: white;
+    padding: 15px 40px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: background 0.3s;
+    display: inline-block;
+}
+
+.start-button:hover {
+    background: #0056b3;
+}
+
+.play-page {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

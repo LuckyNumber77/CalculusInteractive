@@ -3,11 +3,18 @@ import GameBoard from '../components/GameBoard';
 import useGame from '../hooks/useGame';
 
 const Play: React.FC = () => {
-    const gameData = useGame();
+    const { score, problems, currentProblemIndex, isGameOver, answerProblem, resetGame } = useGame();
 
     return (
         <div className="play-page">
-            <GameBoard />
+            <GameBoard 
+                score={score}
+                problems={problems}
+                currentProblemIndex={currentProblemIndex}
+                isGameOver={isGameOver}
+                answerProblem={answerProblem}
+                resetGame={resetGame}
+            />
         </div>
     );
 };

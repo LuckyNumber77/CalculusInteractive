@@ -1,12 +1,16 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 const HUD: React.FC = () => {
+    const location = useLocation();
+    const isGamePage = location.pathname === '/play';
+
     return (
         <div className="hud">
-            <h2>Game Status</h2>
-            <p>Score: 0</p>
-            <p>Time Remaining: 00:00</p>
-            <p>Current Level: 1</p>
+            <h2>Calculus Interactive Game</h2>
+            {isGamePage && (
+                <p>Answer calculus problems to increase your score!</p>
+            )}
         </div>
     );
 };
