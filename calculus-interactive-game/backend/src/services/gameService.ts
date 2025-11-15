@@ -1,12 +1,19 @@
-import { Problem } from '../models/problem'; // Assuming there's a Problem model
-import { User } from '../models/user';
+import User from '../models/user';
+
+// Problem interface definition
+interface Problem {
+    id: string | number;
+    question: string;
+    correctAnswer: number;
+    difficulty?: string;
+}
 
 export class GameService {
     private problems: Problem[];
     private currentProblemIndex: number;
-    private user?: User;
+    private user?: any; // Optional user instance from mongoose model
 
-    constructor(user?: User) {
+    constructor(user?: any) {
         this.user = user;
         this.problems = this.loadProblems();
         this.currentProblemIndex = 0;
