@@ -20,7 +20,7 @@ const path = require('path');
 
 // Paths
 const INPUT_FILE = path.join(__dirname, '../calculus.json');
-const OUTPUT_FILE = path.join(__dirname, '../calculus-interactive-game-1/backend/data/problems.json');
+const OUTPUT_FILE = path.join(__dirname, '../calculus-interactive-game-1/backend/data/problems.full.json');
 
 console.log('Starting Calculus JSON parser...');
 console.log(`Input: ${INPUT_FILE}`);

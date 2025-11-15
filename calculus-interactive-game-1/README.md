@@ -100,7 +100,7 @@ The repository includes a parser script that extracts question/answer pairs from
 
 #### Running the Parser
 
-To regenerate `backend/data/problems.json` from the source text:
+To regenerate `backend/data/problems.full.json` from the source text:
 
 ```bash
 # From the repository root
@@ -110,7 +110,7 @@ node scripts/parseCalculusJson.js
 The parser will:
 - Read the `calculus.json` file at the repository root
 - Extract exercise problems from all chapters
-- Generate `calculus-interactive-game-1/backend/data/problems.json`
+- Generate `calculus-interactive-game-1/backend/data/problems.full.json`
 - Log statistics about extracted problems
 
 #### Using Generated Problems
@@ -119,11 +119,17 @@ The backend API serves problems from `backend/data/problems.json` via the `/api/
 
 **Note:** The parser extracts exercise questions using heuristics. While it captures most problems correctly, some answers may be incomplete or marked as "See solution in text". For production use:
 
-1. Review `backend/data/problems.json` manually
+1. Review `backend/data/problems.full.json` manually
 2. Add explicit answers where needed
-3. Alternatively, use `backend/data/problems.sample.json` which contains 15 hand-validated problems with verified answers
+3. Copy validated problems to `backend/data/problems.json`
+4. Alternatively, use `backend/data/problems.sample.json` which contains 15 hand-validated problems with verified answers (this is the default)
 
-To use the sample problems instead:
+To use the full extracted problems instead of the sample:
+```bash
+cp calculus-interactive-game-1/backend/data/problems.full.json calculus-interactive-game-1/backend/data/problems.json
+```
+
+To restore the sample problems:
 ```bash
 cp calculus-interactive-game-1/backend/data/problems.sample.json calculus-interactive-game-1/backend/data/problems.json
 ```
