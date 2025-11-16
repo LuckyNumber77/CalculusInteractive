@@ -15,8 +15,9 @@ const HelpModal: React.FC<HelpModalProps> = ({
     onClose, 
     onSkip 
 }) => {
-    const baseUrl = 'https://www.whitman.edu/mathematics/multivariable/';
-    const linkUrl = lessonUrl || baseUrl;
+    // Default to viewing the full calculus text if no specific lesson URL is provided
+    const defaultUrl = '/assets/calculus.txt';
+    const linkUrl = lessonUrl || defaultUrl;
 
     return (
         <div className="modal-overlay" onClick={onClose}>
@@ -29,8 +30,8 @@ const HelpModal: React.FC<HelpModalProps> = ({
                 )}
                 <p>
                     {lessonTopic 
-                        ? `Learn more about ${lessonTopic} from the Whitman College Multivariable Calculus resource.`
-                        : 'Review calculus concepts from the Whitman College Multivariable Calculus resource.'
+                        ? `Learn more about ${lessonTopic}.`
+                        : 'Review calculus concepts in the full textbook.'
                     }
                 </p>
                 <div className="help-actions">
@@ -40,15 +41,7 @@ const HelpModal: React.FC<HelpModalProps> = ({
                         rel="noopener noreferrer"
                         className="button primary"
                     >
-                        Open Lesson
-                    </a>
-                    <a 
-                        href="/assets/calculus.txt" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="button"
-                    >
-                        View Full Calculus Text
+                        View Calculus Text
                     </a>
                     <button className="button" onClick={onClose}>
                         Try Again

@@ -1,11 +1,10 @@
 {
   "metadata": {
     "source": "Whitman Calculus Text - Hand-validated Sample",
-    "generatedAt": "2025-11-15T22:45:00.000Z",
+    "generatedAt": "2025-11-16T03:25:00.000Z",
     "totalProblems": 15,
     "license": "Creative Commons Attribution-NonCommercial-ShareAlike License",
-    "url": "https://www.whitman.edu/mathematics/multivariable/",
-    "note": "This is a curated sample with verified answers for immediate use"
+    "note": "This is a curated sample with verified answers for immediate use. Problems link to the hosted calculus text for reference."
   },
   "problems": [
     {
@@ -13,7 +12,6 @@
       "question": "What is the derivative of x^2?",
       "answer": "2x",
       "topic": "Derivatives - Power Rule",
-      "lessonUrl": "https://www.whitman.edu/mathematics/multivariable/",
       "difficulty": "easy"
     },
     {
@@ -21,7 +19,6 @@
       "question": "What is the derivative of x^3?",
       "answer": "3x^2",
       "topic": "Derivatives - Power Rule",
-      "lessonUrl": "https://www.whitman.edu/mathematics/multivariable/",
       "difficulty": "easy"
     },
     {
@@ -29,7 +26,6 @@
       "question": "What is the integral of x dx?",
       "answer": "x^2/2 + C",
       "topic": "Integration - Basic Integrals",
-      "lessonUrl": "https://www.whitman.edu/mathematics/multivariable/",
       "difficulty": "easy"
     },
     {
@@ -37,7 +33,6 @@
       "question": "What is the derivative of sin(x)?",
       "answer": "cos(x)",
       "topic": "Derivatives - Trigonometric Functions",
-      "lessonUrl": "https://www.whitman.edu/mathematics/multivariable/",
       "difficulty": "easy"
     },
     {
@@ -45,7 +40,6 @@
       "question": "What is the derivative of cos(x)?",
       "answer": "-sin(x)",
       "topic": "Derivatives - Trigonometric Functions",
-      "lessonUrl": "https://www.whitman.edu/mathematics/multivariable/",
       "difficulty": "easy"
     },
     {
@@ -53,7 +47,6 @@
       "question": "What is the derivative of e^x?",
       "answer": "e^x",
       "topic": "Derivatives - Exponential Functions",
-      "lessonUrl": "https://www.whitman.edu/mathematics/multivariable/",
       "difficulty": "easy"
     },
     {
@@ -61,7 +54,6 @@
       "question": "What is the derivative of ln(x)?",
       "answer": "1/x",
       "topic": "Derivatives - Logarithmic Functions",
-      "lessonUrl": "https://www.whitman.edu/mathematics/multivariable/",
       "difficulty": "easy"
     },
     {
@@ -69,7 +61,6 @@
       "question": "Find the equation of the line through (−1, 2) with slope −2 in the form y = mx + b.",
       "answer": "y = -2x + 0",
       "topic": "Analytic Geometry - Lines",
-      "lessonUrl": "https://www.whitman.edu/mathematics/multivariable/",
       "difficulty": "medium"
     },
     {
@@ -77,7 +68,6 @@
       "question": "Determine whether the lines 3x + 6y = 7 and 2x + 4y = 5 are parallel.",
       "answer": "Yes, they are parallel (both have slope -1/2)",
       "topic": "Analytic Geometry - Lines",
-      "lessonUrl": "https://www.whitman.edu/mathematics/multivariable/",
       "difficulty": "medium"
     },
     {
@@ -85,7 +75,6 @@
       "question": "What is the product rule for derivatives?",
       "answer": "(fg)' = f'g + fg'",
       "topic": "Derivatives - Product Rule",
-      "lessonUrl": "https://www.whitman.edu/mathematics/multivariable/",
       "difficulty": "medium"
     },
     {
@@ -93,7 +82,6 @@
       "question": "What is the quotient rule for derivatives?",
       "answer": "(f/g)' = (f'g - fg')/g^2",
       "topic": "Derivatives - Quotient Rule",
-      "lessonUrl": "https://www.whitman.edu/mathematics/multivariable/",
       "difficulty": "medium"
     },
     {
@@ -101,7 +89,6 @@
       "question": "What is the chain rule for derivatives?",
       "answer": "d/dx[f(g(x))] = f'(g(x)) * g'(x)",
       "topic": "Derivatives - Chain Rule",
-      "lessonUrl": "https://www.whitman.edu/mathematics/multivariable/",
       "difficulty": "medium"
     },
     {
@@ -109,7 +96,6 @@
       "question": "Find the derivative of x^2 * sin(x) using the product rule.",
       "answer": "2x*sin(x) + x^2*cos(x)",
       "topic": "Derivatives - Product Rule Application",
-      "lessonUrl": "https://www.whitman.edu/mathematics/multivariable/",
       "difficulty": "hard"
     },
     {
@@ -117,7 +103,6 @@
       "question": "What is the integral of cos(x) dx?",
       "answer": "sin(x) + C",
       "topic": "Integration - Trigonometric Functions",
-      "lessonUrl": "https://www.whitman.edu/mathematics/multivariable/",
       "difficulty": "easy"
     },
     {
@@ -125,7 +110,6 @@
       "question": "What is the fundamental theorem of calculus?",
       "answer": "If F is an antiderivative of f, then ∫[a,b] f(x)dx = F(b) - F(a)",
       "topic": "Integration - Fundamental Theorem",
-      "lessonUrl": "https://www.whitman.edu/mathematics/multivariable/",
       "difficulty": "medium"
     }
   ]
