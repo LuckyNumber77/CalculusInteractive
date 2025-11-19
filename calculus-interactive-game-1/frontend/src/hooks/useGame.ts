@@ -17,8 +17,29 @@ const useGame = () => {
 
     useEffect(() => {
         const fetchProblems = async () => {
-            const fetchedProblems = await generateProblems();
-            setProblems(fetchedProblems);
+            try {
+                // Try to fetch problems from the backend API
+                const response = await fetch('/api/games/problems');
+                if (response.ok) {
+                    const data = await response.json();
+                    // Extract problems array from the response
+                    const fetchedProblems = data.problems || data;
+                    if (Array.isArray(fetchedProblems) && fetchedProblems.length > 0) {
+                        setProblems(fetchedProblems);
+                        console.log(`Loaded ${fetchedProblems.length} problems from API`);
+                        return;
+                    }
+                }
+                // If fetch fails or no problems, fall back to local generation
+                console.log('Falling back to local problem generation');
+                const localProblems = await generateProblems();
+                setProblems(localProblems);
+            } catch (error) {
+                // If fetch fails, fall back to local generation
+                console.log('Error fetching problems from API, using fallback:', error);
+                const localProblems = await generateProblems();
+                setProblems(localProblems);
+            }
         };
 
         fetchProblems();
