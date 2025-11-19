@@ -2,7 +2,10 @@ import React from 'react';
 import ProblemCard from './ProblemCard';
 import HelpModal from './HelpModal';
 import LessonModal from './LessonModal';
+import ConceptProgress from './ConceptProgress';
+import ProgressDashboard from './ProgressDashboard';
 import { Lesson } from '../utils/feedback';
+import { ErrorAnalysis } from '../utils/errorDetection';
 
 interface Problem {
     id: string;
@@ -16,7 +19,7 @@ interface Problem {
     lessonUrl?: string;
 }
 
-type FeedbackMode = 'none' | 'hint' | 'lesson' | 'solution';
+type FeedbackMode = 'none' | 'hint' | 'lesson' | 'solution' | 'error';
 
 interface GameBoardProps {
     score: number;
@@ -30,12 +33,15 @@ interface GameBoardProps {
     currentHintIndex: number;
     currentLesson: Lesson | null;
     currentSolution: string[];
+    currentError: ErrorAnalysis | null;
+    showDashboard: boolean;
     answerProblem: (answer: string) => void;
     resetGame: () => void;
     requestHelp: () => void;
     closeHelp: () => void;
     skipProblem: () => void;
     retryQuestion: () => void;
+    toggleDashboard: () => void;
 }
 
 const GameBoard: React.FC<GameBoardProps> = ({
@@ -50,12 +56,15 @@ const GameBoard: React.FC<GameBoardProps> = ({
     currentHintIndex,
     currentLesson,
     currentSolution,
+    currentError,
+    showDashboard,
     answerProblem,
     resetGame,
     requestHelp,
     closeHelp,
     skipProblem,
     retryQuestion,
+    toggleDashboard,
 }) => {
     const currentProblem = problems[currentProblemIndex];
 
@@ -65,16 +74,34 @@ const GameBoard: React.FC<GameBoardProps> = ({
             <div className="score-display">
                 <h2>Score: {score} / {problems.length}</h2>
                 <p>Question {currentProblemIndex + 1} of {problems.length}</p>
+                <button 
+                    className="button dashboard-button" 
+                    onClick={toggleDashboard}
+                    aria-label="View progress dashboard"
+                >
+                    📊 My Progress
+                </button>
             </div>
             
             {!isGameOver && currentProblem ? (
                 <>
+                    {currentError && wasWrong && (
+                        <div className="error-analysis-card" role="alert">
+                            <h3>🔍 {currentError.explanation}</h3>
+                            <p className="error-suggestion">{currentError.suggestion}</p>
+                        </div>
+                    )}
+                    
                     <ProblemCard 
                         problem={currentProblem.question} 
                         onSolve={answerProblem}
                         onRequestHelp={requestHelp}
                         showFeedback={wasWrong}
                     />
+                    
+                    {currentProblem.conceptIds && currentProblem.conceptIds.length > 0 && (
+                        <ConceptProgress conceptIds={currentProblem.conceptIds} />
+                    )}
                     
                     {showHelp && feedbackMode === 'hint' && currentHint && (
                         <HelpModal
@@ -108,6 +135,10 @@ const GameBoard: React.FC<GameBoardProps> = ({
                             onClose={closeHelp}
                             onRetry={retryQuestion}
                         />
+                    )}
+                    
+                    {showDashboard && (
+                        <ProgressDashboard onClose={toggleDashboard} />
                     )}
                 </>
             ) : isGameOver ? (
