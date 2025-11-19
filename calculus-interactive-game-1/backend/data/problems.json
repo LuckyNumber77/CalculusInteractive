@@ -12,105 +12,261 @@
       "question": "What is the derivative of x^2?",
       "answer": "2x",
       "topic": "Derivatives - Power Rule",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "conceptIds": ["power-rule"],
+      "hints": [
+        "Remember the power rule: d/dx[x^n] = n*x^(n-1)",
+        "For x^2, n=2. Bring down the exponent and reduce it by 1."
+      ],
+      "solutionSteps": [
+        "Step 1: Identify that this is a power function: x^2",
+        "Step 2: Apply the power rule: d/dx[x^n] = n*x^(n-1)",
+        "Step 3: Substitute n=2: d/dx[x^2] = 2*x^(2-1) = 2x"
+      ]
     },
     {
       "id": "sample_002",
       "question": "What is the derivative of x^3?",
       "answer": "3x^2",
       "topic": "Derivatives - Power Rule",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "conceptIds": ["power-rule"],
+      "hints": [
+        "Use the power rule: d/dx[x^n] = n*x^(n-1)",
+        "For x^3, bring down 3 and reduce the exponent by 1."
+      ],
+      "solutionSteps": [
+        "Step 1: Apply the power rule with n=3",
+        "Step 2: d/dx[x^3] = 3*x^(3-1) = 3x^2"
+      ]
     },
     {
       "id": "sample_003",
       "question": "What is the integral of x dx?",
       "answer": "x^2/2 + C",
       "topic": "Integration - Basic Integrals",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "conceptIds": ["integration-power-rule"],
+      "hints": [
+        "Use the power rule for integration: ∫x^n dx = x^(n+1)/(n+1) + C",
+        "For x (which is x^1), add 1 to the exponent and divide by the new exponent."
+      ],
+      "solutionSteps": [
+        "Step 1: Recognize x as x^1",
+        "Step 2: Apply integration power rule: ∫x^n dx = x^(n+1)/(n+1) + C",
+        "Step 3: ∫x^1 dx = x^(1+1)/(1+1) + C = x^2/2 + C"
+      ]
     },
     {
       "id": "sample_004",
       "question": "What is the derivative of sin(x)?",
       "answer": "cos(x)",
       "topic": "Derivatives - Trigonometric Functions",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "conceptIds": ["trig-derivatives"],
+      "hints": [
+        "This is a fundamental trigonometric derivative you should memorize.",
+        "The derivative of sin(x) is cos(x)."
+      ],
+      "solutionSteps": [
+        "Step 1: Recall the derivative formula for sine",
+        "Step 2: d/dx[sin(x)] = cos(x)"
+      ]
     },
     {
       "id": "sample_005",
       "question": "What is the derivative of cos(x)?",
       "answer": "-sin(x)",
       "topic": "Derivatives - Trigonometric Functions",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "conceptIds": ["trig-derivatives"],
+      "hints": [
+        "The derivative of cosine is similar to sine, but with a negative sign.",
+        "Remember: d/dx[cos(x)] = -sin(x)"
+      ],
+      "solutionSteps": [
+        "Step 1: Recall the derivative formula for cosine",
+        "Step 2: d/dx[cos(x)] = -sin(x)",
+        "Step 3: Note the negative sign - this is important!"
+      ]
     },
     {
       "id": "sample_006",
       "question": "What is the derivative of e^x?",
       "answer": "e^x",
       "topic": "Derivatives - Exponential Functions",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "conceptIds": ["exponential-derivatives"],
+      "hints": [
+        "e^x is special - it's its own derivative!",
+        "This is one of the most important properties of the exponential function."
+      ],
+      "solutionSteps": [
+        "Step 1: Recall that e^x is unique",
+        "Step 2: d/dx[e^x] = e^x",
+        "Step 3: The function equals its own derivative!"
+      ]
     },
     {
       "id": "sample_007",
       "question": "What is the derivative of ln(x)?",
       "answer": "1/x",
       "topic": "Derivatives - Logarithmic Functions",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "conceptIds": ["logarithmic-derivatives"],
+      "hints": [
+        "The derivative of the natural log is a simple fraction.",
+        "Think: what function has ln(x) as its antiderivative?"
+      ],
+      "solutionSteps": [
+        "Step 1: Recall the derivative of natural logarithm",
+        "Step 2: d/dx[ln(x)] = 1/x",
+        "Step 3: Note: x must be positive for ln(x) to be defined"
+      ]
     },
     {
       "id": "sample_008",
       "question": "Find the equation of the line through (−1, 2) with slope −2 in the form y = mx + b.",
       "answer": "y = -2x + 0",
       "topic": "Analytic Geometry - Lines",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "conceptIds": ["linear-equations"],
+      "hints": [
+        "Use point-slope form: y - y1 = m(x - x1), then convert to y = mx + b",
+        "Plug in the point (-1, 2) and slope m = -2"
+      ],
+      "solutionSteps": [
+        "Step 1: Use point-slope form: y - y1 = m(x - x1)",
+        "Step 2: Substitute: y - 2 = -2(x - (-1)) = -2(x + 1)",
+        "Step 3: Expand: y - 2 = -2x - 2",
+        "Step 4: Solve for y: y = -2x + 0"
+      ]
     },
     {
       "id": "sample_009",
       "question": "Determine whether the lines 3x + 6y = 7 and 2x + 4y = 5 are parallel.",
       "answer": "Yes, they are parallel (both have slope -1/2)",
       "topic": "Analytic Geometry - Lines",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "conceptIds": ["linear-equations", "parallel-lines"],
+      "hints": [
+        "Two lines are parallel if they have the same slope.",
+        "Convert both equations to slope-intercept form (y = mx + b) to find their slopes."
+      ],
+      "solutionSteps": [
+        "Step 1: Convert first line: 3x + 6y = 7 → 6y = -3x + 7 → y = -1/2 x + 7/6",
+        "Step 2: Slope of first line: m1 = -1/2",
+        "Step 3: Convert second line: 2x + 4y = 5 → 4y = -2x + 5 → y = -1/2 x + 5/4",
+        "Step 4: Slope of second line: m2 = -1/2",
+        "Step 5: Since m1 = m2, the lines are parallel"
+      ]
     },
     {
       "id": "sample_010",
       "question": "What is the product rule for derivatives?",
       "answer": "(fg)' = f'g + fg'",
       "topic": "Derivatives - Product Rule",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "conceptIds": ["product-rule"],
+      "hints": [
+        "The product rule is for finding the derivative of two functions multiplied together.",
+        "Remember: derivative of first times second, plus first times derivative of second."
+      ],
+      "solutionSteps": [
+        "Step 1: For two functions f(x) and g(x) multiplied together",
+        "Step 2: The product rule states: d/dx[f(x)·g(x)] = f'(x)·g(x) + f(x)·g'(x)",
+        "Step 3: In shorthand: (fg)' = f'g + fg'"
+      ]
     },
     {
       "id": "sample_011",
       "question": "What is the quotient rule for derivatives?",
       "answer": "(f/g)' = (f'g - fg')/g^2",
       "topic": "Derivatives - Quotient Rule",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "conceptIds": ["quotient-rule"],
+      "hints": [
+        "The quotient rule is for finding the derivative of one function divided by another.",
+        "Remember: (low d-high minus high d-low) over low squared."
+      ],
+      "solutionSteps": [
+        "Step 1: For f(x)/g(x), the quotient rule is needed",
+        "Step 2: (f/g)' = [g(x)·f'(x) - f(x)·g'(x)] / [g(x)]^2",
+        "Step 3: Or: (f/g)' = (f'g - fg')/g^2",
+        "Step 4: Mnemonic: low d-high minus high d-low, all over low squared"
+      ]
     },
     {
       "id": "sample_012",
       "question": "What is the chain rule for derivatives?",
       "answer": "d/dx[f(g(x))] = f'(g(x)) * g'(x)",
       "topic": "Derivatives - Chain Rule",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "conceptIds": ["chain-rule"],
+      "hints": [
+        "The chain rule is for composite functions - a function inside another function.",
+        "Think: derivative of outer (keeping inner the same) times derivative of inner."
+      ],
+      "solutionSteps": [
+        "Step 1: For a composite function f(g(x))",
+        "Step 2: Find the derivative of the outer function f, evaluated at g(x)",
+        "Step 3: Multiply by the derivative of the inner function g(x)",
+        "Step 4: Result: d/dx[f(g(x))] = f'(g(x)) · g'(x)"
+      ]
     },
     {
       "id": "sample_013",
       "question": "Find the derivative of x^2 * sin(x) using the product rule.",
       "answer": "2x*sin(x) + x^2*cos(x)",
       "topic": "Derivatives - Product Rule Application",
-      "difficulty": "hard"
+      "difficulty": "hard",
+      "conceptIds": ["product-rule", "power-rule", "trig-derivatives"],
+      "hints": [
+        "Use the product rule: (fg)' = f'g + fg'",
+        "Let f = x^2 and g = sin(x), then find f' and g' separately."
+      ],
+      "solutionSteps": [
+        "Step 1: Identify f(x) = x^2 and g(x) = sin(x)",
+        "Step 2: Find f'(x) = 2x (using power rule)",
+        "Step 3: Find g'(x) = cos(x) (derivative of sine)",
+        "Step 4: Apply product rule: (fg)' = f'g + fg'",
+        "Step 5: Result: 2x·sin(x) + x^2·cos(x)"
+      ]
     },
     {
       "id": "sample_014",
       "question": "What is the integral of cos(x) dx?",
       "answer": "sin(x) + C",
       "topic": "Integration - Trigonometric Functions",
-      "difficulty": "easy"
+      "difficulty": "easy",
+      "conceptIds": ["trig-integration"],
+      "hints": [
+        "Think about which function has cos(x) as its derivative.",
+        "Remember: the derivative of sin(x) is cos(x)."
+      ],
+      "solutionSteps": [
+        "Step 1: Recall that d/dx[sin(x)] = cos(x)",
+        "Step 2: Therefore, the antiderivative of cos(x) is sin(x)",
+        "Step 3: ∫cos(x) dx = sin(x) + C (don't forget the constant!)"
+      ]
     },
     {
       "id": "sample_015",
       "question": "What is the fundamental theorem of calculus?",
       "answer": "If F is an antiderivative of f, then ∫[a,b] f(x)dx = F(b) - F(a)",
       "topic": "Integration - Fundamental Theorem",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "conceptIds": ["fundamental-theorem"],
+      "hints": [
+        "The fundamental theorem connects differentiation and integration.",
+        "It tells us how to evaluate a definite integral using antiderivatives."
+      ],
+      "solutionSteps": [
+        "Step 1: The fundamental theorem has two parts",
+        "Step 2: Part 1: If F is an antiderivative of f, then ∫[a,b] f(x)dx = F(b) - F(a)",
+        "Step 3: This means: to find the area under f from a to b, find F and subtract F(a) from F(b)",
+        "Step 4: This connects the derivative operation with the integral operation"
+      ]
     }
   ]
 }
