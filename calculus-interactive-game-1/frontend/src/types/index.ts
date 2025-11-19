@@ -1,8 +1,12 @@
 export type Problem = {
-    id: number;
+    id: string;
     question: string;
-    answer: number;
-    options: number[];
+    answer: string;
+    topic?: string;
+    difficulty?: string;
+    conceptIds?: string[];
+    hints?: string[];
+    solutionSteps?: string[];
     lessonTopic?: string;
     lessonUrl?: string;
 };

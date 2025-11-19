@@ -9,12 +9,18 @@ const Play: React.FC = () => {
         currentProblemIndex, 
         isGameOver, 
         showHelp, 
-        wasWrong, 
+        wasWrong,
+        feedbackMode,
+        currentHint,
+        currentHintIndex,
+        currentLesson,
+        currentSolution,
         answerProblem, 
         resetGame, 
         requestHelp, 
         closeHelp, 
-        skipProblem 
+        skipProblem,
+        retryQuestion,
     } = useGame();
 
     return (
@@ -26,11 +32,17 @@ const Play: React.FC = () => {
                 isGameOver={isGameOver}
                 showHelp={showHelp}
                 wasWrong={wasWrong}
+                feedbackMode={feedbackMode}
+                currentHint={currentHint}
+                currentHintIndex={currentHintIndex}
+                currentLesson={currentLesson}
+                currentSolution={currentSolution}
                 answerProblem={answerProblem}
                 resetGame={resetGame}
                 requestHelp={requestHelp}
                 closeHelp={closeHelp}
                 skipProblem={skipProblem}
+                retryQuestion={retryQuestion}
             />
         </div>
     );
