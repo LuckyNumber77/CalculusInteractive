@@ -15,12 +15,15 @@ const Play: React.FC = () => {
         currentHintIndex,
         currentLesson,
         currentSolution,
+        currentError,
+        showDashboard,
         answerProblem, 
         resetGame, 
         requestHelp, 
         closeHelp, 
         skipProblem,
         retryQuestion,
+        toggleDashboard,
     } = useGame();
 
     return (
@@ -37,12 +40,15 @@ const Play: React.FC = () => {
                 currentHintIndex={currentHintIndex}
                 currentLesson={currentLesson}
                 currentSolution={currentSolution}
+                currentError={currentError}
+                showDashboard={showDashboard}
                 answerProblem={answerProblem}
                 resetGame={resetGame}
                 requestHelp={requestHelp}
                 closeHelp={closeHelp}
                 skipProblem={skipProblem}
                 retryQuestion={retryQuestion}
+                toggleDashboard={toggleDashboard}
             />
         </div>
     );

@@ -2,6 +2,7 @@
 
 import { progressStore, ProgressStore } from './progressStore';
 import { analytics } from './analytics';
+import { analyzeIncorrectAnswer, ErrorAnalysis } from './errorDetection';
 
 export type Question = {
   id: string;
@@ -40,6 +41,7 @@ export interface UIHooks {
   showLesson: (lesson: Lesson) => void;
   showSolutionSteps: (steps: string[]) => void;
   showMessage: (message: string) => void;
+  showErrorAnalysis?: (analysis: ErrorAnalysis) => void;
 }
 
 /**
@@ -74,6 +76,12 @@ export async function handleIncorrectAnswer(
     conceptId: question.conceptIds?.[0],
     attemptNumber: qMistakes,
   });
+
+  // Analyze the error to provide specific feedback
+  const errorAnalysis = analyzeIncorrectAnswer(userAnswer, question.answer, question.question);
+  if (errorAnalysis && ui.showErrorAnalysis) {
+    ui.showErrorAnalysis(errorAnalysis);
+  }
 
   // Layered feedback policy:
   // 1-2 mistakes: Show progressive hints (if available)

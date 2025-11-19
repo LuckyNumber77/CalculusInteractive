@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { progressStore } from '../utils/progressStore';
 import { analytics } from '../utils/analytics';
 import { handleIncorrectAnswer, handleCorrectAnswer, fetchLessonByConcept, Question, Lesson } from '../utils/feedback';
+import { ErrorAnalysis } from '../utils/errorDetection';
 
 interface Problem {
     id: string;
@@ -15,7 +16,7 @@ interface Problem {
     lessonUrl?: string;
 }
 
-type FeedbackMode = 'none' | 'hint' | 'lesson' | 'solution';
+type FeedbackMode = 'none' | 'hint' | 'lesson' | 'solution' | 'error';
 
 const useGame = () => {
     const [score, setScore] = useState(0);
@@ -29,6 +30,8 @@ const useGame = () => {
     const [currentHintIndex, setCurrentHintIndex] = useState<number>(0);
     const [currentLesson, setCurrentLesson] = useState<Lesson | null>(null);
     const [currentSolution, setCurrentSolution] = useState<string[]>([]);
+    const [currentError, setCurrentError] = useState<ErrorAnalysis | null>(null);
+    const [showDashboard, setShowDashboard] = useState(false);
 
     useEffect(() => {
         const fetchProblems = async () => {
@@ -130,6 +133,10 @@ const useGame = () => {
                     showMessage: (message: string) => {
                         setCurrentHint(message);
                         setFeedbackMode('hint');
+                    },
+                    showErrorAnalysis: (analysis: ErrorAnalysis) => {
+                        setCurrentError(analysis);
+                        // Error analysis is shown alongside other feedback
                     }
                 },
                 fetchLessonByConcept
@@ -169,6 +176,7 @@ const useGame = () => {
         setWasWrong(false);
         setShowHelp(false);
         setFeedbackMode('none');
+        setCurrentError(null);
         
         analytics.trackEvent('question_retried', {
             questionId: problems[currentProblemIndex]?.id,
@@ -182,7 +190,12 @@ const useGame = () => {
         setShowHelp(false);
         setWasWrong(false);
         setFeedbackMode('none');
+        setCurrentError(null);
         // Note: We don't reset progress store so students can continue learning
+    };
+
+    const toggleDashboard = () => {
+        setShowDashboard(!showDashboard);
     };
 
     return {
@@ -197,12 +210,15 @@ const useGame = () => {
         currentHintIndex,
         currentLesson,
         currentSolution,
+        currentError,
+        showDashboard,
         answerProblem,
         resetGame,
         requestHelp,
         closeHelp,
         skipProblem,
         retryQuestion,
+        toggleDashboard,
     };
 };
 
