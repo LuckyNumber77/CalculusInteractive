@@ -144,11 +144,45 @@ const useGame = () => {
         }
     };
 
-    const requestHelp = () => {
+    const requestHelp = async () => {
+        const currentProblem = problems[currentProblemIndex];
+
+        // Nothing loaded yet — open the generic lesson/text
+        if (!currentProblem) {
+            setFeedbackMode('lesson');
+            setCurrentLesson(null);
+            setShowHelp(true);
+            analytics.trackEvent('hint_requested', { questionId: undefined, mode: 'none' });
+            return;
+        }
+
+        // Prefer showing an explicit hint
+        if (Array.isArray(currentProblem.hints) && currentProblem.hints.length > 0) {
+            setCurrentHint(currentProblem.hints[0]);
+            setCurrentHintIndex(0);
+            setFeedbackMode('hint');
+            setShowHelp(true);
+            analytics.trackEvent('hint_requested', { questionId: currentProblem.id, mode: 'hint' });
+            return;
+        }
+
+        // If there are no hints but there is a lesson reference, show it
+        if (currentProblem.lessonUrl || currentProblem.lessonTopic) {
+            setCurrentLesson({
+                title: currentProblem.lessonTopic || 'Calculus Text',
+                url: currentProblem.lessonUrl || '/assets/calculus.txt',
+            } as any);
+            setFeedbackMode('lesson');
+            setShowHelp(true);
+            analytics.trackEvent('hint_requested', { questionId: currentProblem.id, mode: 'lesson' });
+            return;
+        }
+
+        // Fallback: open generic lesson/text
+        setFeedbackMode('lesson');
+        setCurrentLesson(null);
         setShowHelp(true);
-        analytics.trackEvent('hint_requested', {
-            questionId: problems[currentProblemIndex]?.id,
-        });
+        analytics.trackEvent('hint_requested', { questionId: currentProblem.id, mode: 'fallback' });
     };
 
     const closeHelp = () => {
