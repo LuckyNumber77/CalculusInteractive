@@ -20,6 +20,9 @@ export default defineConfig({
         changeOrigin: true,
       },
     },
+    allowedHosts: [
+      "5173--019a88b6-eaaf-7608-8448-39237987f323.us-east-1-01.gitpod.dev"
+    ],
   },
   build: {
     outDir: 'dist',
