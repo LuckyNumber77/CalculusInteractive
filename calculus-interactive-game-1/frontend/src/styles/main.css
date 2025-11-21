@@ -990,6 +990,107 @@ h1, h2, h3 {
     color: #333;
 }
 
+/* Animations for better UX */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes successGlow {
+    0%, 100% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(40, 167, 69, 0.6);
+    }
+}
+
+/* Apply animations to elements */
+.problem-card {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-overlay {
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.modal-content {
+    animation: slideIn 0.3s ease-out;
+}
+
+.feedback-message {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.score-display {
+    transition: all 0.3s ease;
+}
+
+.score-display:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.3);
+}
+
+.button {
+    transition: all 0.2s ease;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button:active {
+    transform: translateY(0);
+}
+
+/* Improved hover effects */
+.problem-card:hover {
+    box-shadow: 0 6px 16px rgba(0, 123, 255, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+.help-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+}
+
+/* Smooth transitions for inputs */
+.problem-card input {
+    transition: all 0.3s ease;
+}
+
+.problem-card input:focus {
+    transform: scale(1.02);
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .lesson-modal {
@@ -1026,5 +1127,13 @@ h1, h2, h3 {
     .dashboard-button {
         margin-left: 0;
         margin-top: 10px;
+    }
+    
+    /* Reduce animations on mobile for performance */
+    .problem-card,
+    .modal-overlay,
+    .modal-content,
+    .feedback-message {
+        animation: none;
     }
 }
