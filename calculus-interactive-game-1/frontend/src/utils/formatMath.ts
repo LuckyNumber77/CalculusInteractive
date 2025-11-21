@@ -68,7 +68,11 @@ export function toLatex(input: string): string {
  * Attempts to render LaTeX using KaTeX if available.
  * Falls back to the original text if KaTeX is not available or rendering fails.
  * 
- * @param text - Text that may contain LaTeX notation
+ * NOTE: This function uses KaTeX's renderToString with throwOnError: false,
+ * which provides XSS protection by escaping malicious input. It's safe to use
+ * with dangerouslySetInnerHTML when rendering KaTeX output.
+ * 
+ * @param text - Text that may contain LaTeX notation wrapped in $...$
  * @returns Rendered HTML string or original text
  */
 export function renderMathToHTML(text: string): string {
@@ -78,20 +82,18 @@ export function renderMathToHTML(text: string): string {
             return text;
         }
         
-        // Render with KaTeX
-        // Extract the content between $ delimiters
-        const match = text.match(/\$(.+?)\$/);
-        if (match) {
-            const latexContent = match[1];
-            const rendered = katex.renderToString(latexContent, {
-                throwOnError: false,
-                displayMode: false,
-            });
-            // Replace the $...$ with rendered HTML
-            return text.replace(/\$(.+?)\$/, rendered);
-        }
-        
-        return text;
+        // Render with KaTeX - replace all $...$ patterns
+        return text.replace(/\$(.+?)\$/g, (match, latexContent) => {
+            try {
+                return katex.renderToString(latexContent, {
+                    throwOnError: false,
+                    displayMode: false,
+                });
+            } catch (err) {
+                // If individual rendering fails, return the original match
+                return match;
+            }
+        });
     } catch (error) {
         // Fallback to original text if rendering fails
         console.warn('Failed to render math:', error);

@@ -98,6 +98,16 @@ const useGame = () => {
     }, []);
 
     /**
+     * Formats a coefficient for display in a polynomial term.
+     * Returns empty string for 1, "-" for -1, or the coefficient as a string.
+     */
+    const formatCoefficient = (coeff: number): string => {
+        if (coeff === 1) return '';
+        if (coeff === -1) return '-';
+        return coeff.toString();
+    };
+
+    /**
      * Generates randomized polynomial derivative problems.
      * Each problem has random coefficient (-4 to 4, excluding 0) and exponent (1 to 5).
      * Provides progressive LaTeX-formatted hints: conceptual, applied, final answer.
@@ -115,7 +125,7 @@ const useGame = () => {
             const exp = Math.floor(Math.random() * 5) + 1;
             
             // Build the question
-            const coeffStr = coeff === 1 ? '' : coeff === -1 ? '-' : coeff.toString();
+            const coeffStr = formatCoefficient(coeff);
             const expStr = exp === 1 ? '' : `^${exp}`;
             const question = `What is the derivative of ${coeffStr}x${expStr}?`;
             
@@ -129,22 +139,12 @@ const useGame = () => {
                 answer = answerCoeff.toString();
             } else if (answerExp === 1) {
                 // Result is linear: ax
-                if (answerCoeff === 1) {
-                    answer = 'x';
-                } else if (answerCoeff === -1) {
-                    answer = '-x';
-                } else {
-                    answer = `${answerCoeff}x`;
-                }
+                const answerCoeffStr = formatCoefficient(answerCoeff);
+                answer = `${answerCoeffStr}x`;
             } else {
                 // Result has exponent: ax^n
-                if (answerCoeff === 1) {
-                    answer = `x^${answerExp}`;
-                } else if (answerCoeff === -1) {
-                    answer = `-x^${answerExp}`;
-                } else {
-                    answer = `${answerCoeff}x^${answerExp}`;
-                }
+                const answerCoeffStr = formatCoefficient(answerCoeff);
+                answer = `${answerCoeffStr}x^${answerExp}`;
             }
             
             // Generate progressive hints in LaTeX format

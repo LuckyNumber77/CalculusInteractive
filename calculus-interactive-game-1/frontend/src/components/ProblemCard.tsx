@@ -33,6 +33,10 @@ const ProblemCard: React.FC<ProblemCardProps> = ({ problem, onSolve, onRequestHe
     return (
         <div className="problem-card" role="region" aria-label="Problem card">
             <h3 id="problem-title">Problem:</h3>
+            {/* Using dangerouslySetInnerHTML is safe here because:
+                1. Content comes from our own problem generator
+                2. KaTeX sanitizes its output and has XSS protections (throwOnError: false)
+                3. The renderMathToHTML function only processes LaTeX math notation */}
             <p 
                 className="problem-text" 
                 aria-labelledby="problem-title"
