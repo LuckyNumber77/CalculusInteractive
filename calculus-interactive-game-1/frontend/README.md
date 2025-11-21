@@ -2,6 +2,13 @@
 
 This is the frontend part of the Calculus Interactive Game project. It is built using React and TypeScript, providing an interactive platform for users to engage with calculus problems.
 
+## Features
+
+- **Randomized Problem Generation**: Generates varied polynomial derivative problems each session
+- **LaTeX Math Rendering**: Uses KaTeX to render mathematical expressions with proper notation
+- **Progressive Hints**: Provides layered hints from conceptual to specific to final answer
+- **Problem Shuffling**: Ensures different first problems on each game start
+
 ## Project Structure
 
 - **public/**: Contains static files.
@@ -26,9 +33,27 @@ This is the frontend part of the Calculus Interactive Game project. It is built 
 
 ## Getting Started
 
-1. **Installation**: Run `npm install` to install the necessary dependencies.
-2. **Development**: Use `npm run dev` to start the development server.
-3. **Build**: Use `npm run build` to create a production build.
+### Prerequisites
+
+This project requires Node.js and npm to be installed.
+
+### Installation
+
+1. **Install dependencies**: Run `npm install` to install the necessary dependencies.
+   
+   The project uses KaTeX for rendering mathematical expressions. This is already included in the dependencies and will be installed automatically.
+
+2. **Verify KaTeX Installation**: The following packages should be installed:
+   - `katex` - For math rendering
+   - `@types/katex` - TypeScript type definitions for KaTeX
+   
+   The KaTeX CSS is automatically imported in `src/index.tsx`.
+
+### Development
+
+1. **Development Server**: Use `npm run start` to start the development server (using Vite).
+2. **Build**: Use `npm run build` to create a production build.
+3. **Preview Build**: Use `npm run serve` to preview the production build locally.
 
 ## Contributing
 

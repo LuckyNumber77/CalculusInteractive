@@ -1,4 +1,5 @@
 import React from 'react';
+import { renderMathToHTML } from '../utils/formatMath';
 
 interface HelpModalProps {
     lessonTopic?: string;
@@ -55,7 +56,14 @@ const HelpModal: React.FC<HelpModalProps> = ({
                         {hintIndex !== undefined && (
                             <p className="hint-number">Hint {hintIndex + 1}</p>
                         )}
-                        <p className="hint-text">{hint}</p>
+                        {/* Using dangerouslySetInnerHTML is safe here because:
+                            1. Content comes from our own problem generator
+                            2. KaTeX sanitizes its output and has XSS protections (throwOnError: false)
+                            3. The renderMathToHTML function only processes LaTeX math notation */}
+                        <p 
+                            className="hint-text"
+                            dangerouslySetInnerHTML={{ __html: renderMathToHTML(hint) }}
+                        />
                         {hasMoreHints && (
                             <p className="hint-info">
                                 💡 Try answering again. If you need more help, another hint will appear.
@@ -68,8 +76,15 @@ const HelpModal: React.FC<HelpModalProps> = ({
                     <div className="solution-content">
                         <p>Here's how to solve this problem:</p>
                         <ol className="solution-steps">
+                            {/* Using dangerouslySetInnerHTML is safe here because:
+                                1. Content comes from our own problem generator
+                                2. KaTeX sanitizes its output and has XSS protections (throwOnError: false)
+                                3. The renderMathToHTML function only processes LaTeX math notation */}
                             {solutionSteps.map((step, index) => (
-                                <li key={index}>{step}</li>
+                                <li 
+                                    key={index}
+                                    dangerouslySetInnerHTML={{ __html: renderMathToHTML(step) }}
+                                />
                             ))}
                         </ol>
                     </div>
