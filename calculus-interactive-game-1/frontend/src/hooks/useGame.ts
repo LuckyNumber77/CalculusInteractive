@@ -19,6 +19,7 @@ import { analytics } from '../utils/analytics';
 import { handleIncorrectAnswer, handleCorrectAnswer, fetchLessonByConcept, Question, Lesson } from '../utils/feedback';
 import { ErrorAnalysis } from '../utils/errorDetection';
 import { toLatex } from '../utils/formatMath';
+import { isAnswerCorrect } from '../utils/answerValidation';
 
 interface Problem {
     id: string;
@@ -175,7 +176,9 @@ const useGame = () => {
         if (isGameOver) return;
 
         const currentProblem = problems[currentProblemIndex];
-        const isCorrect = answer.trim().toLowerCase() === currentProblem.answer.trim().toLowerCase();
+        
+        // Use improved answer validation
+        const isCorrect = isAnswerCorrect(answer, currentProblem.answer);
         
         if (isCorrect) {
             setScore(score + 1);
