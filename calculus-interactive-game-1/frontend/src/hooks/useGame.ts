@@ -1,8 +1,24 @@
+/**
+ * Custom hook for managing calculus game state.
+ * 
+ * This hook manages the game logic including:
+ * - Loading and shuffling problems (from API or fallback generator)
+ * - Randomized polynomial derivative problem generation
+ * - Progressive hint system with LaTeX formatting
+ * - Answer checking and feedback
+ * 
+ * NOTE: Math rendering requires KaTeX to be installed:
+ *   npm install katex @types/katex
+ * And KaTeX CSS must be imported in index.tsx or App.tsx:
+ *   import 'katex/dist/katex.min.css';
+ */
+
 import { useState, useEffect } from 'react';
 import { progressStore } from '../utils/progressStore';
 import { analytics } from '../utils/analytics';
 import { handleIncorrectAnswer, handleCorrectAnswer, fetchLessonByConcept, Question, Lesson } from '../utils/feedback';
 import { ErrorAnalysis } from '../utils/errorDetection';
+import { toLatex } from '../utils/formatMath';
 
 interface Problem {
     id: string;
@@ -17,6 +33,18 @@ interface Problem {
 }
 
 type FeedbackMode = 'none' | 'hint' | 'lesson' | 'solution' | 'error';
+
+/**
+ * Shuffles an array in place using Fisher-Yates algorithm
+ */
+function shuffleArray<T>(array: T[]): T[] {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
 
 const useGame = () => {
     const [score, setScore] = useState(0);
@@ -43,47 +71,104 @@ const useGame = () => {
                     // Extract problems array from the response
                     const fetchedProblems = data.problems || data;
                     if (Array.isArray(fetchedProblems) && fetchedProblems.length > 0) {
-                        setProblems(fetchedProblems);
-                        console.log(`Loaded ${fetchedProblems.length} problems from API`);
+                        // Shuffle the problems array to vary the first problem shown
+                        const shuffledProblems = shuffleArray(fetchedProblems);
+                        setProblems(shuffledProblems);
+                        console.log(`Loaded ${shuffledProblems.length} problems from API (shuffled)`);
                         return;
                     }
                 }
                 // If fetch fails or no problems, fall back to local generation
                 console.log('Falling back to local problem generation');
                 const localProblems = await generateProblems();
-                setProblems(localProblems);
+                // Shuffle fallback problems too
+                const shuffledProblems = shuffleArray(localProblems);
+                setProblems(shuffledProblems);
             } catch (error) {
                 // If fetch fails, fall back to local generation
                 console.log('Error fetching problems from API, using fallback:', error);
                 const localProblems = await generateProblems();
-                setProblems(localProblems);
+                // Shuffle fallback problems too
+                const shuffledProblems = shuffleArray(localProblems);
+                setProblems(shuffledProblems);
             }
         };
 
         fetchProblems();
     }, []);
 
+    /**
+     * Generates randomized polynomial derivative problems.
+     * Each problem has random coefficient (-4 to 4, excluding 0) and exponent (1 to 5).
+     * Provides progressive LaTeX-formatted hints: conceptual, applied, final answer.
+     */
     const generateProblems = async (): Promise<Problem[]> => {
-        return [
-            { 
-                id: 'fallback_001',
-                question: 'What is the derivative of x^2?', 
-                answer: '2x',
+        const numProblems = 10; // Generate 10 varied problems
+        const problems: Problem[] = [];
+        
+        for (let i = 0; i < numProblems; i++) {
+            // Random coefficient between -4 and 4, excluding 0
+            let coeff = Math.floor(Math.random() * 9) - 4;
+            if (coeff === 0) coeff = 1;
+            
+            // Random exponent between 1 and 5
+            const exp = Math.floor(Math.random() * 5) + 1;
+            
+            // Build the question
+            const coeffStr = coeff === 1 ? '' : coeff === -1 ? '-' : coeff.toString();
+            const expStr = exp === 1 ? '' : `^${exp}`;
+            const question = `What is the derivative of ${coeffStr}x${expStr}?`;
+            
+            // Calculate the answer
+            const answerCoeff = coeff * exp;
+            const answerExp = exp - 1;
+            
+            let answer: string;
+            if (answerExp === 0) {
+                // Result is a constant
+                answer = answerCoeff.toString();
+            } else if (answerExp === 1) {
+                // Result is linear: ax
+                if (answerCoeff === 1) {
+                    answer = 'x';
+                } else if (answerCoeff === -1) {
+                    answer = '-x';
+                } else {
+                    answer = `${answerCoeff}x`;
+                }
+            } else {
+                // Result has exponent: ax^n
+                if (answerCoeff === 1) {
+                    answer = `x^${answerExp}`;
+                } else if (answerCoeff === -1) {
+                    answer = `-x^${answerExp}`;
+                } else {
+                    answer = `${answerCoeff}x^${answerExp}`;
+                }
+            }
+            
+            // Generate progressive hints in LaTeX format
+            const hints: string[] = [
+                // Hint 1: Conceptual - remind them of the power rule
+                toLatex(`Remember the power rule: d/dx[x^n] = n*x^(n-1)`),
+                // Hint 2: Applied - apply to this specific problem
+                toLatex(`For ${coeffStr}x${expStr}, bring down the exponent ${exp} and multiply by the coefficient, then reduce the exponent by 1`),
+                // Hint 3: Final - show the answer
+                toLatex(`The derivative is ${answer}`)
+            ];
+            
+            problems.push({
+                id: `fallback_derivative_${i + 1}`,
+                question,
+                answer,
                 conceptIds: ['power-rule'],
-                hints: ['Remember the power rule: d/dx[x^n] = n*x^(n-1)'],
-                lessonTopic: 'Derivatives',
+                hints,
+                lessonTopic: 'Derivatives - Power Rule',
                 lessonUrl: 'https://www.whitman.edu/mathematics/multivariable/multivariable_13_Derivatives.html'
-            },
-            { 
-                id: 'fallback_002',
-                question: 'What is the integral of x?', 
-                answer: '0.5x^2 + C',
-                conceptIds: ['integration-power-rule'],
-                hints: ['Use the power rule for integration: ∫x^n dx = x^(n+1)/(n+1) + C'],
-                lessonTopic: 'Integration',
-                lessonUrl: 'https://www.whitman.edu/mathematics/multivariable/multivariable_14_Integration.html'
-            },
-        ];
+            });
+        }
+        
+        return problems;
     };
 
     const answerProblem = async (answer: string) => {

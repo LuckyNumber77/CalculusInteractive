@@ -1,4 +1,5 @@
 import React from 'react';
+import { renderMathToHTML } from '../utils/formatMath';
 
 interface HelpModalProps {
     lessonTopic?: string;
@@ -55,7 +56,10 @@ const HelpModal: React.FC<HelpModalProps> = ({
                         {hintIndex !== undefined && (
                             <p className="hint-number">Hint {hintIndex + 1}</p>
                         )}
-                        <p className="hint-text">{hint}</p>
+                        <p 
+                            className="hint-text"
+                            dangerouslySetInnerHTML={{ __html: renderMathToHTML(hint) }}
+                        />
                         {hasMoreHints && (
                             <p className="hint-info">
                                 💡 Try answering again. If you need more help, another hint will appear.
@@ -69,7 +73,10 @@ const HelpModal: React.FC<HelpModalProps> = ({
                         <p>Here's how to solve this problem:</p>
                         <ol className="solution-steps">
                             {solutionSteps.map((step, index) => (
-                                <li key={index}>{step}</li>
+                                <li 
+                                    key={index}
+                                    dangerouslySetInnerHTML={{ __html: renderMathToHTML(step) }}
+                                />
                             ))}
                         </ol>
                     </div>

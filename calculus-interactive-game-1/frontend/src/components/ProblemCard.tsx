@@ -1,4 +1,5 @@
 import React from 'react';
+import { renderMathToHTML } from '../utils/formatMath';
 
 interface ProblemCardProps {
     problem: string;
@@ -32,7 +33,11 @@ const ProblemCard: React.FC<ProblemCardProps> = ({ problem, onSolve, onRequestHe
     return (
         <div className="problem-card" role="region" aria-label="Problem card">
             <h3 id="problem-title">Problem:</h3>
-            <p className="problem-text" aria-labelledby="problem-title">{problem}</p>
+            <p 
+                className="problem-text" 
+                aria-labelledby="problem-title"
+                dangerouslySetInnerHTML={{ __html: renderMathToHTML(problem) }}
+            />
             
             {showFeedback && (
                 <div className="feedback-message incorrect" role="alert">
