@@ -19,7 +19,7 @@ import { analytics } from '../utils/analytics';
 import { handleIncorrectAnswer, handleCorrectAnswer, fetchLessonByConcept, Question, Lesson } from '../utils/feedback';
 import { ErrorAnalysis } from '../utils/errorDetection';
 import { toLatex } from '../utils/formatMath';
-import { isAnswerCorrect, getAnswerFeedback } from '../utils/answerValidation';
+import { isAnswerCorrect } from '../utils/answerValidation';
 
 interface Problem {
     id: string;

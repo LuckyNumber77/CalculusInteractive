@@ -9,6 +9,10 @@
  * - Removes extra whitespace
  * - Normalizes common mathematical notations
  * 
+ * NOTE: This is a simple normalization suitable for the current problem set.
+ * For more complex expressions requiring algebraic simplification (e.g., '2*3*x' → '6x'),
+ * consider using a computer algebra system library like math.js or algebrite.
+ * 
  * @param answer - The answer string to normalize
  * @returns Normalized answer string
  */
@@ -19,6 +23,7 @@ export function normalizeAnswer(answer: string): string {
         // Remove all spaces
         .replace(/\s+/g, '')
         // Normalize multiplication: * → (nothing), × → (nothing)
+        // Note: This works for expressions like '2*x' → '2x' but won't simplify '2*3*x'
         .replace(/[*×]/g, '')
         // Normalize division: ÷ → /
         .replace(/÷/g, '/')
@@ -59,6 +64,9 @@ export function isAnswerCorrect(userAnswer: string, correctAnswer: string): bool
  * Generates common alternative representations of a mathematical expression.
  * For example, "2x" can also be written as "x2", "2*x", etc.
  * 
+ * NOTE: This handles simple cases. For complex expressions with multiple operations,
+ * a proper mathematical expression parser would be needed.
+ * 
  * @param answer - The normalized answer
  * @returns Array of alternative representations
  */
@@ -66,6 +74,7 @@ function generateAlternatives(answer: string): string[] {
     const alternatives: string[] = [answer];
     
     // Handle fraction alternatives: x^2/2 vs (x^2)/2 vs x^2/2
+    // Note: This is a simple pattern match and may not handle all cases correctly
     if (answer.includes('/')) {
         // Add version with parentheses around numerator
         const withParens = answer.replace(/([^/]+)\//, '($1)/');
